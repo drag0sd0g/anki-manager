@@ -1,38 +1,34 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { getDeckNamesAndIds } from "../features/decks/deckSlice";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getDeckNamesAndIds, deckSelected } from "../features/decks/deckSlice";
 import { getNotes } from "../features/notes/noteSlice";
 import Spinner from "../components/Spinner";
 
 function DeckSelect() {
-  const [selectedDeck, setSelectedDeck] = useState({
-    deckId: "",
-  });
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   //read decks & loading status from redux state
-  const { decks, isLoading, isError, message } = useSelector(
+  const { selectedDeck, decks, isLoading, isError, message } = useSelector(
     (state) => state.decks
   );
 
   //when a deck is selected
   const onDeckSelected = (e) => {
-    setSelectedDeck((prevState) => ({
-      ...prevState,
-      deckId: e.target.value,
-    }));
+    dispatch(deckSelected(e.target.value));
   };
 
   //when view cards button is pressed
   const onViewCards = () => {
-    dispatch(getNotes(selectedDeck.deckId));
+    dispatch(getNotes(selectedDeck));
+    navigate("/notes");
   };
 
   //load decks on component render
   useEffect(() => {
     if (isError) {
-      console.log(message);
+      console.log("error in DeckSelect", message);
     }
     dispatch(getDeckNamesAndIds());
   }, [isError, message, dispatch]);

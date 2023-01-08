@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import deckService from "./deckService";
 
 const initialState = {
+  selectedDeck: "",
   decks: [],
   isError: false,
   isSuccess: false,
@@ -30,7 +31,13 @@ export const getDeckNamesAndIds = createAsyncThunk(
 export const deckSlice = createSlice({
   name: "deck",
   initialState,
-  reducers: {},
+  reducers: {
+    deckSelected: {
+      reducer(state, action) {
+        state.selectedDeck = action.payload;
+      },
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getDeckNamesAndIds.pending, (state) => {
@@ -56,3 +63,4 @@ export const deckSlice = createSlice({
 });
 
 export default deckSlice.reducer;
+export const { deckSelected } = deckSlice.actions;
