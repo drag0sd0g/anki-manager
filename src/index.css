@@ -37,6 +37,12 @@ code {
 h1,
 h2,
 h3 {
+  font-family: cursive;
   font-weight: 600;
   margin-bottom: 10px;
+}
+
+.deckSelector {
+  width: 300px;
+  padding-top: 25px;
 }

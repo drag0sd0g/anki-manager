@@ -14,6 +14,9 @@ function DeckSelect() {
   //when a deck is selected
   const onDeckSelected = (e) => console.log("Selected ", e.target.value);
 
+  //when view cards button is pressed
+  const onViewCards = () => console.log("Getting cards for current deck");
+
   //load decks on component render
   useEffect(() => {
     if (isError) {
@@ -35,14 +38,18 @@ function DeckSelect() {
   ));
 
   return (
-    <section>
+    <div className="mx-auto deckSelector">
       <h2>Select a deck</h2>
       <form>
-        <select id="decks" onChange={onDeckSelected}>
+        <select className="form-select" id="decks" onChange={onDeckSelected}>
           {dropDownDeckOptions}
         </select>
+        <br />
+        <button type="button" class="btn btn-primary" onClick={onViewCards}>
+          View Cards
+        </button>
       </form>
-    </section>
+    </div>
   );
 }
 
