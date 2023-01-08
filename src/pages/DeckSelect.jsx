@@ -1,21 +1,31 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getDeckNamesAndIds } from "../features/decks/deckSlice";
 import Spinner from "../components/Spinner";
 
 function DeckSelect() {
+  const [selectedDeck, setSelectedDeck] = useState({
+    deckId: "",
+  });
+
   const dispatch = useDispatch();
 
-  //read decks & loading status from state
+  //read decks & loading status from redux state
   const { decks, isLoading, isError, message } = useSelector(
     (state) => state.decks
   );
 
   //when a deck is selected
-  const onDeckSelected = (e) => console.log("Selected ", e.target.value);
+  const onDeckSelected = (e) => {
+    setSelectedDeck((prevState) => ({
+      ...prevState,
+      deckId: e.target.value,
+    }));
+  };
 
   //when view cards button is pressed
-  const onViewCards = () => console.log("Getting cards for current deck");
+  const onViewCards = () =>
+    console.log("Getting cards for selected deck", selectedDeck);
 
   //load decks on component render
   useEffect(() => {
