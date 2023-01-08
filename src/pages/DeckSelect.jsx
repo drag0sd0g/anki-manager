@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getDeckNamesAndIds } from "../features/decks/deckSlice";
+import { getNotes } from "../features/notes/noteSlice";
 import Spinner from "../components/Spinner";
 
 function DeckSelect() {
@@ -24,8 +25,9 @@ function DeckSelect() {
   };
 
   //when view cards button is pressed
-  const onViewCards = () =>
-    console.log("Getting cards for selected deck", selectedDeck);
+  const onViewCards = () => {
+    dispatch(getNotes(selectedDeck.deckId));
+  };
 
   //load decks on component render
   useEffect(() => {

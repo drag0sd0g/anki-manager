@@ -7,8 +7,15 @@ const getDeckNamesAndIds = async () => {
       "Content-Type": "application/json",
     },
   };
-  const postData = { action: "deckNamesAndIds", version: 6 };
-  const response = await axios.post("http://localhost:8765", postData, config);
+  const postData = {
+    action: "deckNamesAndIds",
+    version: parseInt(process.env.REACT_APP_ANKI_API_VERSION),
+  };
+  const response = await axios.post(
+    process.env.REACT_APP_ANKI_URL,
+    postData,
+    config
+  );
   return response.data;
 };
 
