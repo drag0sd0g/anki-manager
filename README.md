@@ -21,4 +21,6 @@
 - [React](https://reactjs.org/)
 - [Redux](https://redux.js.org/)
 - [Axios](https://axios-http.com/)
+- [Bootstrap](https://getbootstrap.com/)
+- [FontAwesome](https://fontawesome.com/)
 - [AnkiConnect](https://github.com/FooSoft/anki-connect)
