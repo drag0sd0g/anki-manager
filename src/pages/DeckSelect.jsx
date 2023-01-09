@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getDeckNamesAndIds, deckSelected } from "../features/decks/deckSlice";
+import { getDecks, deckSelected } from "../features/decks/deckSlice";
 import { getNotes } from "../features/notes/noteSlice";
 import Spinner from "../components/Spinner";
 
@@ -33,7 +33,7 @@ function DeckSelect() {
     if (isError) {
       console.log("error in DeckSelect", message);
     }
-    dispatch(getDeckNamesAndIds());
+    dispatch(getDecks());
   }, [isError, message, dispatch]);
 
   //show spinner if we're still loading the decks
