@@ -16,10 +16,8 @@ function DeckSelect() {
 
   //when a deck is selected
   const onDeckSelected = (e) => {
-    const selectedIndex = e.nativeEvent.target.selectedIndex;
-    const deckId = e.target.value;
-    const deckName = e.nativeEvent.target[selectedIndex].text;
-    dispatch(deckSelected({ deckId, deckName }));
+    const deckData = decks.find((deck) => deck.deckId === e.target.value);
+    dispatch(deckSelected(deckData));
   };
 
   //when view cards button is pressed
