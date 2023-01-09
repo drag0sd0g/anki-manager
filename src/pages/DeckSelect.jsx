@@ -16,12 +16,15 @@ function DeckSelect() {
 
   //when a deck is selected
   const onDeckSelected = (e) => {
-    dispatch(deckSelected(e.target.value));
+    const selectedIndex = e.nativeEvent.target.selectedIndex;
+    const deckId = e.target.value;
+    const deckName = e.nativeEvent.target[selectedIndex].text;
+    dispatch(deckSelected({ deckId, deckName }));
   };
 
   //when view cards button is pressed
   const onViewCards = () => {
-    dispatch(getNotes(selectedDeck));
+    dispatch(getNotes(selectedDeck.deckId));
     navigate("/notes");
   };
 

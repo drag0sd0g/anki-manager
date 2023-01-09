@@ -40,6 +40,39 @@ const getNotesInfo = async (noteIdArr) => {
   return response.data;
 };
 
-const noteService = { getNotesForDeck, getNotesInfo };
+//add a note
+const addNote = async (deckName, expression, reading, meaning) => {
+  //prep headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  //prep payload
+  const postData = {
+    action: "addNote",
+    version: parseInt(process.env.REACT_APP_ANKI_API_VERSION),
+    params: {
+      note: {
+        deckName,
+        modelName: "Basic",
+        fields: {
+          Expression: expression,
+          Reading: reading,
+          Meaning: meaning,
+        },
+      },
+    },
+  };
+  // peform async call
+  const response = await axios.post(
+    process.env.REACT_APP_ANKI_URL,
+    postData,
+    config
+  );
+  return response.data;
+};
+
+const noteService = { getNotesForDeck, getNotesInfo, addNote };
 
 export default noteService;

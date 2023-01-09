@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
+import AddCardForm from "../components/AddCardForm";
 import { stripTags } from "../helpers/utils";
 
 function CardView() {
   const { notes } = useSelector((state) => state.notes);
-  console.log(notes);
   const renderedNotes = notes.map((note, index) => (
     <tr key={note.noteId}>
       <td>{index}</td>
@@ -26,6 +26,7 @@ function CardView() {
         </thead>
         <tbody>{renderedNotes}</tbody>
       </table>
+      <AddCardForm />
     </section>
   );
 }

@@ -30,6 +30,30 @@ export const getNotes = createAsyncThunk(
   }
 );
 
+export const addNote = createAsyncThunk(
+  "notes/addNote",
+  async (noteData, thunkAPI) => {
+    try {
+      const { expression, meaning, reading } = noteData;
+      const selectedDeck = thunkAPI.getState().decks.selectedDeck.deckName;
+      return await noteService.addNote(
+        selectedDeck,
+        expression,
+        meaning,
+        reading
+      );
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const noteSlice = createSlice({
   name: "note",
   initialState,
@@ -45,6 +69,19 @@ export const noteSlice = createSlice({
         state.notes = action.payload.result;
       })
       .addCase(getNotes.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload.error;
+      })
+      .addCase(addNote.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addNote.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        //TODO - update node state with new addition
+      })
+      .addCase(addNote.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload.error;
