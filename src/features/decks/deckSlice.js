@@ -51,6 +51,7 @@ export const deckSlice = createSlice({
   name: "deck",
   initialState,
   reducers: {
+    decksReset: (state) => initialState,
     deckSelected: {
       reducer(state, action) {
         state.selectedDeck = action.payload;
@@ -76,4 +77,4 @@ export const deckSlice = createSlice({
 });
 
 export default deckSlice.reducer;
-export const { deckSelected } = deckSlice.actions;
+export const { deckSelected, decksReset } = deckSlice.actions;

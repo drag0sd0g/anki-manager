@@ -51,12 +51,19 @@ function DeckSelect() {
       <h2>Select a deck</h2>
       <form>
         <select className="form-select" id="decks" onChange={onDeckSelected}>
+          <option disabled={selectedDeck}>~~~Select A Deck~~~</option>
           {dropDownDeckOptions}
         </select>
         <br />
-        <button type="button" className="btn btn-primary" onClick={onViewCards}>
-          View Cards
-        </button>
+        {selectedDeck ? (
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={onViewCards}
+          >
+            View Cards
+          </button>
+        ) : null}
       </form>
     </div>
   );
