@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 import AddCardForm from "../components/AddCardForm";
 import { stripTags } from "../helpers/utils";
+import Spinner from "../components/Spinner";
 
 function CardView() {
-  const { notes } = useSelector((state) => state.notes);
+  const { notes, isLoading } = useSelector((state) => state.notes);
   const renderedNotes = notes.map((note, index) => (
     <tr key={note.noteId}>
       <td>{index}</td>
@@ -12,6 +13,11 @@ function CardView() {
       <td>{stripTags(note.fields.Reading.value)}</td>
     </tr>
   ));
+
+  //show spinner if we're still loading the notes
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <section>
