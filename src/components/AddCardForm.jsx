@@ -47,7 +47,7 @@ function AddCardForm() {
           />
         </div>
         <div className="form-group">
-          <button className="btn btn-block" type="submit">
+          <button className="btn btn-primary" type="submit">
             Add Card
           </button>
         </div>

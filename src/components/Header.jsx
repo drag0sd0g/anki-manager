@@ -14,11 +14,15 @@ function Header() {
     navigate("/");
   };
 
+  const homeAlready = "/" === window.location.pathname;
+
   return (
     <header className="header">
-      <button className="btn" onClick={goHome}>
-        <FaHome />
-      </button>
+      {!homeAlready ? (
+        <button className="btn" onClick={goHome}>
+          <FaHome />
+        </button>
+      ) : null}
     </header>
   );
 }

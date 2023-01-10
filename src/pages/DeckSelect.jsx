@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getDecks, deckSelected } from "../features/decks/deckSlice";
 import { getNotes } from "../features/notes/noteSlice";
 import Spinner from "../components/Spinner";
+import DeckStats from "../components/DeckStats";
 
 function DeckSelect() {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ function DeckSelect() {
 
   return (
     <div className="mx-auto deckSelector">
-      <h2>Select a deck</h2>
+      <h2>Deck</h2>
       <form>
         <select className="form-select" id="decks" onChange={onDeckSelected}>
           <option disabled={selectedDeck}>~~~Select A Deck~~~</option>
@@ -65,6 +66,8 @@ function DeckSelect() {
           </button>
         ) : null}
       </form>
+      <br />
+      {selectedDeck ? <DeckStats /> : null}
     </div>
   );
 }
